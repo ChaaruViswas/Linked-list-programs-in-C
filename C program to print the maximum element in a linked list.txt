@@ -1,0 +1,46 @@
+//C program to print the maximum element in a linked list
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node* next;
+};
+
+void insert(struct Node** head,int data)
+{
+    struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
+    newNode->data=data;
+    newNode->next= *head;
+    *head = newNode;
+}
+
+int findMax(struct Node* head)
+{
+    int max=head->data;
+    struct Node* current = head->next;
+    while(current!=NULL)
+    {
+        if(current->data>max)
+            max=current->data;
+        current=current->next;
+    }
+    return max;
+}
+
+int main()
+{
+    struct Node* head=NULL;
+    int n,data;
+    scanf("%d",&n);
+    while(n--)
+    {
+        scanf("%d",&data);
+        insert(&head,data);
+    }
+    int max=findMax(head);
+    printf("%d",max);
+    return 0;
+}
